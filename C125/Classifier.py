@@ -1,0 +1,15 @@
+from flask import Flask,jsonify,request
+app=Flask(__name__)
+
+from classifier import get_prediction
+
+@app.route("/prdict-digit",method=['POST'])
+def predict_data():
+    image=request.files.get('digit')
+    prediction=get_prediction(image)
+    return jsonify({
+        "prediction":'prediction'
+    }),200
+
+if __name__=='__main__':
+    app.run(debug=True)
